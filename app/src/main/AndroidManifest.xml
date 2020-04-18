@@ -4,6 +4,7 @@
     package="com.example.graduate_work_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppThem.NoActionBar" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

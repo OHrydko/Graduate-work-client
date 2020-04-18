@@ -5,12 +5,14 @@ public class Login {
     private boolean success;
     private String mobile_number;
     private String text;
+    private Boolean isUser;
 
-    public Login(int status, boolean success, String mobile_number, String text) {
+    public Login(int status, boolean success, String mobile_number, String text, Boolean isUser) {
         this.status = status;
         this.success = success;
         this.mobile_number = mobile_number;
         this.text = text;
+        this.isUser = isUser;
     }
 
     public int getStatus() {
@@ -43,5 +45,13 @@ public class Login {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Boolean isUser() {
+        return isUser;
+    }
+
+    public void setUser(Boolean user) {
+        isUser = user;
     }
 }

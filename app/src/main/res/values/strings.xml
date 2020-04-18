@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">graduate-work-android</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="mobile_phone">Mobile phone</string>
+    <string name="password">Password</string>
 </resources>
