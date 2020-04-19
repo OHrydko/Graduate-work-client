@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/white"
-                    android:drawableStart="@drawable/ic_https_black_24dp"
+                    android:drawableStart="@drawable/ic_lock"
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"

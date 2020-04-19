@@ -7,4 +7,14 @@
     <string name="no_account_yet_create_one">No account yet? Create one</string>
     <string name="mobile_phone">Mobile phone</string>
     <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
+    <string name="user_name">User name</string>
+    <string name="birthday">Birthday</string>
+    <string name="or_login">Or Login</string>
+    <string name="errorMobilePhone">Mobile phone must be 10 characters without 38</string>
+    <string name="required_field">Required field</string>
+    <string name="did_not_macth">Password and confirm password didn\'t match</string>
 </resources>

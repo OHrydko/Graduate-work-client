@@ -1,13 +1,13 @@
 package com.example.graduate_work_android.models;
 
-public class Login {
+public class ResponseModel {
     private int status;
     private boolean success;
     private String mobile_number;
     private String text;
     private Boolean isUser;
 
-    public Login(int status, boolean success, String mobile_number, String text, Boolean isUser) {
+    public ResponseModel(int status, boolean success, String mobile_number, String text, Boolean isUser) {
         this.status = status;
         this.success = success;
         this.mobile_number = mobile_number;

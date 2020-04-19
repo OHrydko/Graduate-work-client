@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -14,7 +13,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.graduate_work_android.App;
 import com.example.graduate_work_android.R;
-import com.example.graduate_work_android.models.Login;
+import com.example.graduate_work_android.models.ResponseModel;
 import com.example.graduate_work_android.ui.home.HomeActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -47,10 +46,11 @@ public class LoginViewModel extends ViewModel {
                                 Log.d("throwable", throwable.getMessage() + ""));
     }
 
-    private void loginResult(Login login) {
+    private void loginResult(ResponseModel login) {
         isLoader.postValue(false);
         if (login.isSuccess()) {
             //sharedPreferences.edit().putBoolean("login", true).apply();
+            sharedPreferences.edit().putString("mobileNumber", login.getMobile_number()).apply();
             activity.startActivity(new Intent(activity, HomeActivity.class));
         } else {
             Toast.makeText(activity, login.getText(), Toast.LENGTH_SHORT).show();
