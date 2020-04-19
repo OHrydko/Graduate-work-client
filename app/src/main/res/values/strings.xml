@@ -17,4 +17,7 @@
     <string name="errorMobilePhone">Mobile phone must be 10 characters without 38</string>
     <string name="required_field">Required field</string>
     <string name="did_not_macth">Password and confirm password didn\'t match</string>
+    <string name="choosePicture">choose_picture</string>
+    <string name="picture">picture</string>
+    <string name="camera">camera</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.graduate_work_android.ui.login;
+package com.example.graduate_work_android.ui.registration;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -14,20 +14,17 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.graduate_work_android.App;
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.models.ResponseModel;
+import com.example.graduate_work_android.repository.Repository;
 import com.example.graduate_work_android.ui.home.HomeActivity;
+import com.example.graduate_work_android.ui.login.LoginFragment;
+import com.example.graduate_work_android.utils.callback.CallBackRegistration;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-
-public class RegistrationViewModel extends ViewModel {
+public class RegistrationViewModel extends ViewModel implements CallBackRegistration {
 
     public MutableLiveData<String> mobileNumber = new MutableLiveData<>();
     public MutableLiveData<String> textErrorNumber = new MutableLiveData<>();
@@ -60,21 +57,22 @@ public class RegistrationViewModel extends ViewModel {
     public MutableLiveData<Boolean> isLoader = new MutableLiveData<>(false);
     private SharedPreferences sharedPreferences;
     private FragmentActivity activity;
-
+    private Repository repository;
     private Calendar calendar = Calendar.getInstance();
 
     void init(FragmentActivity activity) {
         this.activity = activity;
         birthday = new MutableLiveData<>(activity.getResources().getString(R.string.birthday));
         sharedPreferences = activity.getSharedPreferences("User", Context.MODE_PRIVATE);
+        repository = new Repository();
     }
 
     public void clickButton() {
         if (checkFields()) {
             isLoader.postValue(true);
             if (birthday.getValue() != null)
-                registration(mobileNumber.getValue(), password.getValue(), name.getValue(),
-                        lastName.getValue(), birthday.getValue(), userName.getValue());
+                repository.registration(mobileNumber.getValue(), password.getValue(), name.getValue(),
+                        lastName.getValue(), birthday.getValue(), userName.getValue(), this);
         }
     }
 
@@ -117,38 +115,6 @@ public class RegistrationViewModel extends ViewModel {
 
     }
 
-    @SuppressLint("CheckResult")
-    private void registration(String mobileNumber, String passwordField, String nameField,
-                              String lastNameField, String birthdayField, String userNameField) {
-        RequestBody mobile = RequestBody.create(mobileNumber, MediaType.parse("text/plain"));
-
-        RequestBody password = RequestBody.create(passwordField, MediaType.parse("text/plain"));
-        RequestBody name = RequestBody.create(nameField, MediaType.parse("text/plain"));
-        RequestBody lastName = RequestBody.create(lastNameField, MediaType.parse("text/plain"));
-        RequestBody birthday = RequestBody.create(birthdayField.replace(" ", ""),
-                MediaType.parse("text/plain"));
-        RequestBody userName = RequestBody.create(userNameField, MediaType.parse("text/plain"));
-
-        App.getComponent().getApi()
-                .registration(mobile, password, name, lastName, birthday, userName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::registrationResult,
-                        throwable ->
-                                Log.d("throwable", throwable.getMessage() + ""));
-    }
-
-    private void registrationResult(ResponseModel responseModel) {
-        isLoader.postValue(false);
-        if (responseModel.isSuccess()) {
-            sharedPreferences.edit().putString("mobileNumber",
-                    responseModel.getMobile_number()).apply();
-            activity.startActivity(new Intent(activity, HomeActivity.class));
-        } else {
-            Toast.makeText(activity, responseModel.getText(), Toast.LENGTH_SHORT).show();
-        }
-        Log.d("response", responseModel.getStatus() + "");
-    }
 
     public void login() {
         activity.getSupportFragmentManager()
@@ -206,5 +172,18 @@ public class RegistrationViewModel extends ViewModel {
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
 
+    }
+
+    @Override
+    public void response(ResponseModel responseModel) {
+        isLoader.postValue(false);
+        if (responseModel.isSuccess()) {
+            sharedPreferences.edit().putString("mobileNumber",
+                    responseModel.getMobile_number()).apply();
+            activity.startActivity(new Intent(activity, HomeActivity.class));
+        } else {
+            Toast.makeText(activity, responseModel.getText(), Toast.LENGTH_SHORT).show();
+        }
+        Log.d("response", responseModel.getStatus() + "");
     }
 }

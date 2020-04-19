@@ -1,4 +1,4 @@
-package com.example.graduate_work_android.ui.login;
+package com.example.graduate_work_android.ui.registration;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

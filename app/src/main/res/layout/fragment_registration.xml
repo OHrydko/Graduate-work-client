@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.graduate_work_android.ui.login.RegistrationViewModel" />
+            type="com.example.graduate_work_android.ui.registration.RegistrationViewModel" />
 
     </data>
 
