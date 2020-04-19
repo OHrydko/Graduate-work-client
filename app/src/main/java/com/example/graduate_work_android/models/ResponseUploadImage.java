@@ -13,29 +13,16 @@ public class ResponseUploadImage {
         this.text = text;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 
     public String getResult() {
         return result;
     }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
 
     public String getText() {
         return text;
@@ -43,5 +30,9 @@ public class ResponseUploadImage {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

@@ -26,7 +26,7 @@ public class BottomFragment extends BottomSheetDialogFragment {
     ImageButton camera;
     private boolean isClick = false;
 
-    public BottomFragment(ItemClickListener itemClickListener) {
+    BottomFragment(ItemClickListener itemClickListener) {
         mListener = itemClickListener;
     }
 
