@@ -71,8 +71,11 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
 
                 }
             } else if (requestCode == REQUEST_CODE_CAMERA) {
-                if (imageUri != null)
+                if (imageUri != null) {
+                    imageUri = CapturePhotoUtils.insertImage(activity.getContentResolver(),
+                            decodeFile(imageUri));
                     file = new File(Objects.requireNonNull(FileUtil.getPath(imageUri, activity)));
+                }
             }
 
             if (requestCode == REQUEST_CODE_CAMERA || requestCode == REQUEST_CODE_GALLERY) {
