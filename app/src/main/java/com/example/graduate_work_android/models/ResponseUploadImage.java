@@ -1,16 +1,32 @@
 package com.example.graduate_work_android.models;
 
+import java.util.List;
+
 public class ResponseUploadImage {
     private int status;
     private boolean success;
     private String result;
     private String text;
+    private String allergic;
+    private List<Supplement> supplement;
 
-    public ResponseUploadImage(int status, boolean success, String result, String text) {
+    public ResponseUploadImage(int status, boolean success, String result, String text, String allergic, List<Supplement> supplement) {
         this.status = status;
         this.success = success;
         this.result = result;
         this.text = text;
+        this.allergic = allergic;
+        this.supplement = supplement;
+    }
+
+
+    public String getAllergic() {
+        return allergic;
+    }
+
+
+    public List<Supplement> getSupplement() {
+        return supplement;
     }
 
 

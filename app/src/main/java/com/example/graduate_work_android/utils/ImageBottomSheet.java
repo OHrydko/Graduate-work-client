@@ -3,9 +3,7 @@ package com.example.graduate_work_android.utils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,14 +17,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.graduate_work_android.repository.Repository;
-import com.example.graduate_work_android.utils.callback.CallBackUpload;
 import com.example.graduate_work_android.utils.callback.StartActivityForResultCallback;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -40,23 +35,18 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
     private Uri imageUri;
     private StartActivityForResultCallback startActivity;
     private static final int STORAGE_PERMISSION_CODE = 100;
-    private SharedPreferences sharedPreferences;
-    private CallBackUpload callBackUpload;
 
-    public ImageBottomSheet(FragmentActivity activity, StartActivityForResultCallback startActivity,
-                            CallBackUpload callBackUpload) {
+    public ImageBottomSheet(FragmentActivity activity,
+                            StartActivityForResultCallback startActivity) {
         this.activity = activity;
         this.startActivity = startActivity;
-        sharedPreferences = activity.getSharedPreferences("User", Context.MODE_PRIVATE);
-        this.callBackUpload = callBackUpload;
     }
 
 
     @SuppressLint("CheckResult")
-    public HashMap<String, String> getParam(int requestCode, int resultCode, @Nullable Intent data,
-                                            FragmentActivity activity) {
+    public File getParam(int requestCode, int resultCode, @Nullable Intent data,
+                         FragmentActivity activity) {
         File file = null;
-        HashMap<String, String> sendData = new HashMap<>();
         if (resultCode == RESULT_OK) {
 
 
@@ -78,17 +68,9 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
                 }
             }
 
-            if (requestCode == REQUEST_CODE_CAMERA || requestCode == REQUEST_CODE_GALLERY) {
-                if (file != null) {
-                    Repository repository = new Repository();
-                    repository.uploadFile(sharedPreferences
-                                    .getString("mobileNumber", "0000000000"),
-                            file, callBackUpload);
-                }
 
-            }
         }
-        return sendData;
+        return file;
     }
 
 

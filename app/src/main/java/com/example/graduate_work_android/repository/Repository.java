@@ -7,6 +7,7 @@ import com.example.graduate_work_android.App;
 import com.example.graduate_work_android.utils.callback.CallBackLogin;
 import com.example.graduate_work_android.utils.callback.CallBackRegistration;
 import com.example.graduate_work_android.utils.callback.CallBackUpload;
+import com.example.graduate_work_android.utils.callback.CallbackHistory;
 
 import java.io.File;
 
@@ -55,8 +56,11 @@ public class Repository {
     }
 
     @SuppressLint("CheckResult")
-    public void uploadFile(String mobileNumber, File file, CallBackUpload callBackUpload) {
+    public void uploadFile(String names, String mobileNumber, File file, CallBackUpload callBackUpload) {
         RequestBody mobile = RequestBody.create(mobileNumber,
+                MediaType.parse("text/plain"));
+
+        RequestBody name = RequestBody.create(names,
                 MediaType.parse("text/plain"));
 
         RequestBody requestFile =
@@ -65,10 +69,21 @@ public class Repository {
         MultipartBody.Part fileToUpload =
                 MultipartBody.Part.createFormData("file", file.getName(),
                         requestFile);
-        App.getComponent().getApi().uploadImage(mobile, fileToUpload)
+        App.getComponent().getApi().uploadImage(name, mobile, fileToUpload)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callBackUpload::responseUploadImage,
+                        throwable ->
+                                Log.d("throwable", throwable.getMessage() + ""));
+    }
+
+    @SuppressLint("CheckResult")
+    public void history(String mobileNumber, CallbackHistory callbackHistory) {
+
+        App.getComponent().getApi().history(mobileNumber)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callbackHistory::responseHistory,
                         throwable ->
                                 Log.d("throwable", throwable.getMessage() + ""));
     }

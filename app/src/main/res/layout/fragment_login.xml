@@ -16,7 +16,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#34445e"
+        android:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,8 @@
                 android:src="@drawable/ic_remove_red_eye_black_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
             <!--  Email Label -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textMobile"

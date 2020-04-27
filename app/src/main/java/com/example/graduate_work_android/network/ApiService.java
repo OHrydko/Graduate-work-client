@@ -1,14 +1,17 @@
 package com.example.graduate_work_android.network;
 
+import com.example.graduate_work_android.models.ResponseHistory;
 import com.example.graduate_work_android.models.ResponseModel;
 import com.example.graduate_work_android.models.ResponseUploadImage;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -28,8 +31,12 @@ public interface ApiService {
 
     @Multipart
     @POST("upload")
-    Observable<ResponseUploadImage> uploadImage(@Part("mobile_phone") RequestBody mobile,
+    Observable<ResponseUploadImage> uploadImage(@Part("name") RequestBody name,
+                                                @Part("mobile_phone") RequestBody mobile,
                                                 @Part MultipartBody.Part file);
+
+    @GET("history")
+    Observable<ResponseHistory> history(@Query("mobile_phone") String mobilePhone);
 
 
 }
