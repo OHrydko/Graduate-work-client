@@ -15,10 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.adapter.ResponseAdapter;
 import com.example.graduate_work_android.databinding.FragmentResponseImageBinding;
+import com.example.graduate_work_android.models.Allergic;
 import com.example.graduate_work_android.models.ResponseUploadImage;
+import com.example.graduate_work_android.models.RowType;
 import com.example.graduate_work_android.ui.home.photo.PhotoViewModel;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ResponseImageFragment extends Fragment {
@@ -42,15 +48,31 @@ public class ResponseImageFragment extends Fragment {
 
         ResponseUploadImage response = viewModel.getResponse().getValue();
 
+        List<RowType> list = new ArrayList<>();
+        if (response != null) {
+            if (response.getAllergic() != null) {
+                List<String> myList = new ArrayList<>(Arrays.asList(response.getAllergic().split(",")));
+                List<Allergic> allergic = new ArrayList<>();
+                for (String row : myList) {
+                    allergic.add(new Allergic(row));
+                }
+                list.addAll(allergic);
+            }
+
+            if (response.getSupplement() != null) {
+                list.addAll(response.getSupplement());
+            }
+        }
+
         RecyclerView recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setHasFixedSize(true);
-
-        ResponseAdapter adapter = new ResponseAdapter(response, activity);
-        recyclerView.setAdapter(adapter);
+        if (list.size() > 0) {
+            ResponseAdapter adapter = new ResponseAdapter(list, activity);
+            recyclerView.setAdapter(adapter);
+        }
 
         return binding.getRoot();
     }
-
 
 }

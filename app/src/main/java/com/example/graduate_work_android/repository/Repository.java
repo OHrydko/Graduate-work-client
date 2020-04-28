@@ -73,8 +73,7 @@ public class Repository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callBackUpload::responseUploadImage,
-                        throwable ->
-                                Log.d("throwable", throwable.getMessage() + ""));
+                        throwable -> callBackUpload.throwable());
     }
 
     @SuppressLint("CheckResult")

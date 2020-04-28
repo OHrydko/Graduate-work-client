@@ -1,6 +1,6 @@
 package com.example.graduate_work_android.models;
 
-public class Supplement {
+public class Supplement implements RowType {
     private String categories;
     private String danger;
     private String name;
@@ -17,17 +17,26 @@ public class Supplement {
         return categories;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
 
     public String getDanger() {
         return danger;
     }
 
-    public void setDanger(String danger) {
-        this.danger = danger;
+    @Override
+    public String getCategory() {
+        return categories;
     }
+
+    @Override
+    public String getId() {
+        return number_supplement;
+    }
+
+    @Override
+    public String getAllergic() {
+        return null;
+    }
+
 
     public String getName() {
         return name;
@@ -41,7 +50,4 @@ public class Supplement {
         return number_supplement;
     }
 
-    public void setNumber_supplement(String number_supplement) {
-        this.number_supplement = number_supplement;
-    }
 }

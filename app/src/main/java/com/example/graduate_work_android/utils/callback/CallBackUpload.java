@@ -4,4 +4,5 @@ import com.example.graduate_work_android.models.ResponseUploadImage;
 
 public interface CallBackUpload {
     void responseUploadImage(ResponseUploadImage responseUploadImage);
+    void throwable();
 }

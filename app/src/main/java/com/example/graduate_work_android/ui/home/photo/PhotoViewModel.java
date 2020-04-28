@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -73,9 +74,16 @@ public class PhotoViewModel extends ViewModel implements CallBackUpload {
                     .commit();
             Log.d("res", responseUploadImage.getResult());
         } else {
+            throwable();
             Log.d("res", responseUploadImage.getText());
         }
 
+    }
+
+    @Override
+    public void throwable() {
+        isLoader.postValue(false);
+        Toast.makeText(activity, "server error", Toast.LENGTH_SHORT).show();
     }
 
     public MutableLiveData<ResponseUploadImage> getResponse() {

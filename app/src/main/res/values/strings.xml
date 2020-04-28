@@ -26,4 +26,7 @@
     <string name="analyze">Analyze</string>
     <string name="category">Категорія:</string>
     <string name="danger">Небезпека:</string>
+    <string name="allergic">Алергія</string>
+    <string name="hightDanger">Висока</string>
+    <string name="product">Продукт:</string>
 </resources>

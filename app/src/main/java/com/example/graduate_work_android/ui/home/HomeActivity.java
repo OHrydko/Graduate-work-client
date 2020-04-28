@@ -1,9 +1,7 @@
 package com.example.graduate_work_android.ui.home;
 
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -14,8 +12,8 @@ import com.example.graduate_work_android.databinding.ActivityHomeBinding;
 import com.example.graduate_work_android.ui.home.photo.PhotoFragment;
 
 public class HomeActivity extends AppCompatActivity {
+    private String state = "home";
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,16 +34,31 @@ public class HomeActivity extends AppCompatActivity {
         binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    openFragment(new PhotoFragment());
+                    if (!state.equals("home")) {
+                        openFragment(new PhotoFragment());
+                        state = "home";
+                    }
                     return true;
                 case R.id.navigation_history:
+                    if (!state.equals("history")) {
+                        openFragment(new PhotoFragment());
+                        state = "history";
+                    }
                     //openFragment(SmsFragment.newInstance("", ""));
                     return true;
                 case R.id.navigation_allergic:
+                    if (!state.equals("allergic")) {
+                        openFragment(new PhotoFragment());
+                        state = "allergic";
+                    }
                     //openFragment(NotificationFragment.newInstance("", ""));
                     return true;
 
                 case R.id.navigation_supplement:
+                    if (!state.equals("supplement")) {
+                        openFragment(new PhotoFragment());
+                        state = "supplement";
+                    }
                     //openFragment(NotificationFragment.newInstance("", ""));
                     return true;
             }
