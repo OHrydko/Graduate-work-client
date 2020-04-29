@@ -9,6 +9,7 @@ import com.example.graduate_work_android.utils.callback.CallBackResponse;
 import com.example.graduate_work_android.utils.callback.CallBackUpload;
 import com.example.graduate_work_android.utils.callback.CallbackAllergic;
 import com.example.graduate_work_android.utils.callback.CallbackHistory;
+import com.example.graduate_work_android.utils.callback.CallbackSupplement;
 
 import java.io.File;
 
@@ -86,6 +87,16 @@ public class Repository {
                 .subscribe(callbackHistory::responseHistory,
                         throwable ->
                                 Log.d("throwable", throwable.getMessage() + ""));
+    }
+
+    @SuppressLint("CheckResult")
+    public void getSupplement(CallbackSupplement supplement) {
+
+        App.getComponent().getApi().getSupplement()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(supplement::responseSupplement,
+                        supplement::error);
     }
 
 

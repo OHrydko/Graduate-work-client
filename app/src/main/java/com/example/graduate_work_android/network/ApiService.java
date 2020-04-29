@@ -3,7 +3,9 @@ package com.example.graduate_work_android.network;
 import com.example.graduate_work_android.models.ResponseAllergic;
 import com.example.graduate_work_android.models.ResponseHistory;
 import com.example.graduate_work_android.models.ResponseModel;
+import com.example.graduate_work_android.models.ResponseSupplement;
 import com.example.graduate_work_android.models.ResponseUploadImage;
+import com.example.graduate_work_android.models.Supplement;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -42,10 +44,13 @@ public interface ApiService {
     @GET("allergic_user")
     Observable<ResponseAllergic> getAllergic(@Query("mobile") String mobilePhone);
 
+    @GET("supplement")
+    Observable<ResponseSupplement> getSupplement();
+
     @Multipart
     @POST("allergic")
     Observable<ResponseModel> allergic(@Part("mobile_phone") RequestBody mobile,
-                                    @Part("name") RequestBody name);
+                                       @Part("name") RequestBody name);
 
 
 }

@@ -11,6 +11,7 @@ import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.databinding.ActivityHomeBinding;
 import com.example.graduate_work_android.ui.home.allergic.AllergicFragment;
 import com.example.graduate_work_android.ui.home.photo.PhotoFragment;
+import com.example.graduate_work_android.ui.home.supplement.SupplementFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private String state = "home";
@@ -55,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 case R.id.navigation_supplement:
                     if (!state.equals("supplement")) {
-                        openFragment(new PhotoFragment());
+                        openFragment(new SupplementFragment());
                         state = "supplement";
                     }
                     return true;

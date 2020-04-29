@@ -51,6 +51,11 @@ public class ResponseAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public void setData(List<RowType> data) {
+        this.response = data;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
@@ -70,12 +75,18 @@ public class ResponseAdapter extends RecyclerView.Adapter {
                     ((AdapterViewHolder) holder).itemBinding.name.setTextColor(colors.get("yellow"));
                     break;
                 case "Немає":
+
+                default:
                     ((AdapterViewHolder) holder).itemBinding.name.setTextColor(colors.get("green"));
                     break;
+
             }
             ((AdapterViewHolder) holder).itemBinding.idE.setText(String.format("E %s",
                     supplement.getId()));
-            ((AdapterViewHolder) holder).itemBinding.name.setText(supplement.getName());
+            String names = supplement.getName().substring(0, 1).toUpperCase()
+                    + supplement.getName().substring(1);
+
+            ((AdapterViewHolder) holder).itemBinding.name.setText(names);
             ((AdapterViewHolder) holder).itemBinding.category.setText(supplement.getCategory());
             ((AdapterViewHolder) holder).itemBinding.danger.setText(supplement.getDanger());
         } else {
