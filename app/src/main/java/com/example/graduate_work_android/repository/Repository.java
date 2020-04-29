@@ -4,9 +4,10 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.graduate_work_android.App;
-import com.example.graduate_work_android.utils.callback.CallBackLogin;
 import com.example.graduate_work_android.utils.callback.CallBackRegistration;
+import com.example.graduate_work_android.utils.callback.CallBackResponse;
 import com.example.graduate_work_android.utils.callback.CallBackUpload;
+import com.example.graduate_work_android.utils.callback.CallbackAllergic;
 import com.example.graduate_work_android.utils.callback.CallbackHistory;
 
 import java.io.File;
@@ -20,7 +21,7 @@ import okhttp3.RequestBody;
 public class Repository {
 
     @SuppressLint("CheckResult")
-    public void login(String mobileNumber, String passwords, CallBackLogin callBackLogin) {
+    public void login(String mobileNumber, String passwords, CallBackResponse callBackLogin) {
         RequestBody mobile = RequestBody.create(mobileNumber, MediaType.parse("text/plain"));
 
         RequestBody password = RequestBody.create(passwords, MediaType.parse("text/plain"));
@@ -85,5 +86,31 @@ public class Repository {
                 .subscribe(callbackHistory::responseHistory,
                         throwable ->
                                 Log.d("throwable", throwable.getMessage() + ""));
+    }
+
+
+    @SuppressLint("CheckResult")
+    public void getAllergic(String mobileNumber, CallbackAllergic callbackAllergic) {
+
+        App.getComponent().getApi().getAllergic(mobileNumber)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callbackAllergic::responseAllergic,
+                        callbackAllergic::error);
+    }
+
+    @SuppressLint("CheckResult")
+    public void addAllergic(String mobileNumber, String names, CallBackResponse callBackResponse) {
+        RequestBody mobile = RequestBody.create(mobileNumber,
+                MediaType.parse("text/plain"));
+
+        RequestBody name = RequestBody.create(names,
+                MediaType.parse("text/plain"));
+
+        App.getComponent().getApi().allergic(mobile, name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBackResponse::response,
+                        callBackResponse::errorResponse);
     }
 }

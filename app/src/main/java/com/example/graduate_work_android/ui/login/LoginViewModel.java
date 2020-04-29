@@ -14,9 +14,9 @@ import com.example.graduate_work_android.models.ResponseModel;
 import com.example.graduate_work_android.repository.Repository;
 import com.example.graduate_work_android.ui.home.HomeActivity;
 import com.example.graduate_work_android.ui.registration.RegistrationFragment;
-import com.example.graduate_work_android.utils.callback.CallBackLogin;
+import com.example.graduate_work_android.utils.callback.CallBackResponse;
 
-public class LoginViewModel extends ViewModel implements CallBackLogin {
+public class LoginViewModel extends ViewModel implements CallBackResponse {
     private FragmentActivity activity;
     public MutableLiveData<String> mobileNumber = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
@@ -56,5 +56,10 @@ public class LoginViewModel extends ViewModel implements CallBackLogin {
         } else {
             Toast.makeText(activity, responseModel.getText(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void errorResponse(Throwable throwable) {
+        isLoader.postValue(false);
     }
 }

@@ -29,4 +29,7 @@
     <string name="allergic">Алергія</string>
     <string name="hightDanger">Висока</string>
     <string name="product">Продукт:</string>
+    <string name="list_allergies">Список Ваших алергій:</string>
+    <string name="name_allergic">Введіть назву алергії</string>
+    <string name="add">Додати</string>
 </resources>

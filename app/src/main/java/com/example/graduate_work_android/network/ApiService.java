@@ -1,5 +1,6 @@
 package com.example.graduate_work_android.network;
 
+import com.example.graduate_work_android.models.ResponseAllergic;
 import com.example.graduate_work_android.models.ResponseHistory;
 import com.example.graduate_work_android.models.ResponseModel;
 import com.example.graduate_work_android.models.ResponseUploadImage;
@@ -37,6 +38,14 @@ public interface ApiService {
 
     @GET("history")
     Observable<ResponseHistory> history(@Query("mobile_phone") String mobilePhone);
+
+    @GET("allergic_user")
+    Observable<ResponseAllergic> getAllergic(@Query("mobile") String mobilePhone);
+
+    @Multipart
+    @POST("allergic")
+    Observable<ResponseModel> allergic(@Part("mobile_phone") RequestBody mobile,
+                                    @Part("name") RequestBody name);
 
 
 }

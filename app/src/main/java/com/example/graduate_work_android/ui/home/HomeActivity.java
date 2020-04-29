@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.databinding.ActivityHomeBinding;
+import com.example.graduate_work_android.ui.home.allergic.AllergicFragment;
 import com.example.graduate_work_android.ui.home.photo.PhotoFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -44,14 +45,12 @@ public class HomeActivity extends AppCompatActivity {
                         openFragment(new PhotoFragment());
                         state = "history";
                     }
-                    //openFragment(SmsFragment.newInstance("", ""));
                     return true;
                 case R.id.navigation_allergic:
                     if (!state.equals("allergic")) {
-                        openFragment(new PhotoFragment());
+                        openFragment(new AllergicFragment());
                         state = "allergic";
                     }
-                    //openFragment(NotificationFragment.newInstance("", ""));
                     return true;
 
                 case R.id.navigation_supplement:
@@ -59,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
                         openFragment(new PhotoFragment());
                         state = "supplement";
                     }
-                    //openFragment(NotificationFragment.newInstance("", ""));
                     return true;
             }
             return false;

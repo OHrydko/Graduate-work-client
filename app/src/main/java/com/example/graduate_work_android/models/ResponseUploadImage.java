@@ -7,10 +7,11 @@ public class ResponseUploadImage {
     private boolean success;
     private String result;
     private String text;
-    private String allergic;
+    private List<String> allergic;
     private List<Supplement> supplement;
 
-    public ResponseUploadImage(int status, boolean success, String result, String text, String allergic, List<Supplement> supplement) {
+    public ResponseUploadImage(int status, boolean success, String result, String text,
+                               List<String> allergic, List<Supplement> supplement) {
         this.status = status;
         this.success = success;
         this.result = result;
@@ -20,7 +21,7 @@ public class ResponseUploadImage {
     }
 
 
-    public String getAllergic() {
+    public List<String> getAllergic() {
         return allergic;
     }
 
