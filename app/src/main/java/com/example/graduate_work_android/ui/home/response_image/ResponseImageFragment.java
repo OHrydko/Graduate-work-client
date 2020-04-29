@@ -59,6 +59,9 @@ public class ResponseImageFragment extends Fragment {
 
             if (response.getSupplement() != null) {
                 list.addAll(response.getSupplement());
+                list.addAll(response.getSupplement());
+                list.addAll(response.getSupplement());
+                list.addAll(response.getSupplement());
             }
         }
 

@@ -22,11 +22,13 @@ import java.util.List;
 public class AllergicViewModel extends ViewModel implements CallbackAllergic, CallBackResponse {
     private MutableLiveData<List<String>> data = new MutableLiveData<>();
     public MutableLiveData<Boolean> isLoader = new MutableLiveData<>(true);
+    public MutableLiveData<Boolean> isLoaderDialog = new MutableLiveData<>(false);
     public MutableLiveData<String> name = new MutableLiveData<>();
     private Repository repository;
     private FragmentActivity activity;
     private String mobile;
     private Dialog dialog;
+
     void init(FragmentActivity activity) {
         this.activity = activity;
         repository = new Repository();
@@ -45,7 +47,7 @@ public class AllergicViewModel extends ViewModel implements CallbackAllergic, Ca
 
     @Override
     public void response(ResponseModel responseModel) {
-        isLoader.postValue(false);
+        isLoaderDialog.postValue(false);
         dialog.dismiss();
 
         if (responseModel.isSuccess()) {
@@ -59,7 +61,7 @@ public class AllergicViewModel extends ViewModel implements CallbackAllergic, Ca
 
     @Override
     public void errorResponse(Throwable throwable) {
-        isLoader.postValue(false);
+        isLoaderDialog.postValue(false);
         Toast.makeText(activity, "server error", Toast.LENGTH_SHORT).show();
     }
 
@@ -82,10 +84,12 @@ public class AllergicViewModel extends ViewModel implements CallbackAllergic, Ca
     }
 
     public void addAllergic() {
-        if (name.getValue() != null && !name.getValue().isEmpty())
+        if (name.getValue() != null && !name.getValue().isEmpty()) {
+            isLoaderDialog.setValue(true);
             repository.addAllergic(mobile, name.getValue(), this);
-        else
+        } else {
             dialog.dismiss();
+        }
     }
 
 
