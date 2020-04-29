@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.databinding.ActivityHomeBinding;
 import com.example.graduate_work_android.ui.home.allergic.AllergicFragment;
+import com.example.graduate_work_android.ui.home.history.HistoryFragment;
 import com.example.graduate_work_android.ui.home.photo.PhotoFragment;
 import com.example.graduate_work_android.ui.home.supplement.SupplementFragment;
 
@@ -43,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_history:
                     if (!state.equals("history")) {
-                        openFragment(new PhotoFragment());
+                        openFragment(new HistoryFragment());
                         state = "history";
                     }
                     return true;

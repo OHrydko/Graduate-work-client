@@ -85,8 +85,7 @@ public class Repository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callbackHistory::responseHistory,
-                        throwable ->
-                                Log.d("throwable", throwable.getMessage() + ""));
+                        callbackHistory::error);
     }
 
     @SuppressLint("CheckResult")

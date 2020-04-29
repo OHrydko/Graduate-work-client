@@ -4,4 +4,5 @@ import com.example.graduate_work_android.models.ResponseHistory;
 
 public interface CallbackHistory {
     void responseHistory(ResponseHistory responseHistory);
+    void error(Throwable throwable);
 }
