@@ -35,6 +35,7 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
     private Uri imageUri;
     private StartActivityForResultCallback startActivity;
     private static final int STORAGE_PERMISSION_CODE = 100;
+    private boolean isCamera = false;
 
     public ImageBottomSheet(FragmentActivity activity,
                             StartActivityForResultCallback startActivity) {
@@ -52,6 +53,7 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
 
             if (requestCode == REQUEST_CODE_GALLERY) {
                 Uri selectedImage = null;
+                isCamera = false;
                 if (data != null) {
                     selectedImage = CapturePhotoUtils.insertImage(activity.getContentResolver(),
                             decodeFile(data.getData()));
@@ -61,6 +63,7 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
 
                 }
             } else if (requestCode == REQUEST_CODE_CAMERA) {
+                isCamera = true;
                 if (imageUri != null) {
                     imageUri = CapturePhotoUtils.insertImage(activity.getContentResolver(),
                             decodeFile(imageUri));
@@ -171,8 +174,8 @@ public class ImageBottomSheet implements BottomFragment.ItemClickListener {
             e.printStackTrace();
         }
         Matrix matrix = new Matrix();
-
-        matrix.postRotate(90);
+        if (isCamera)
+            matrix.postRotate(90);
 
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(b, b.getWidth(), b.getHeight(), true);
 

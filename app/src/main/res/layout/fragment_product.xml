@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.graduate_work_android.ui.home.photo.PhotoViewModel" />
+            type="com.example.graduate_work_android.ui.home.product.ProductViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        tools:context=".ui.home.photo.PhotoFragment">
+        tools:context=".ui.home.product.ProductFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textNamePhoto"
@@ -78,7 +78,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:onClick="@{(view) -> viewModel.clickButton()}"
+            android:onClick="@{(view) -> viewModel.file()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textNameType">
@@ -117,6 +117,31 @@
                 app:layout_constraintTop_toBottomOf="@id/dateImage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:drawableStart="@drawable/ic_diet"
+                android:drawablePadding="10dp"
+                android:hint="@string/igredient"
+                android:inputType="text"
+                android:text="@={viewModel.ingredient}"
+                android:textColor="@android:color/white"
+                tools:ignore="TextFields" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
@@ -126,16 +151,16 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/border_button"
-            android:onClick="@{(view) -> viewModel.analyze()}"
+            android:onClick="@{(view) -> viewModel.add()}"
             android:padding="12dp"
-            android:text="@string/analyze"
+            android:text="@string/add"
             android:textColor="@android:color/white"
             android:textSize="16sp"
 
             android:visibility="@{safeUnbox(viewModel.isLoader ? View.INVISIBLE : View.VISIBLE)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo" />
+            app:layout_constraintTop_toBottomOf="@id/textIngredient" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/containerLouder"

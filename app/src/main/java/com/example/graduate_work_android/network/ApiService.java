@@ -5,7 +5,6 @@ import com.example.graduate_work_android.models.ResponseHistory;
 import com.example.graduate_work_android.models.ResponseModel;
 import com.example.graduate_work_android.models.ResponseSupplement;
 import com.example.graduate_work_android.models.ResponseUploadImage;
-import com.example.graduate_work_android.models.Supplement;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -37,6 +36,14 @@ public interface ApiService {
     Observable<ResponseUploadImage> uploadImage(@Part("name") RequestBody name,
                                                 @Part("mobile_phone") RequestBody mobile,
                                                 @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("product")
+    Observable<ResponseModel> product(@Part("name") RequestBody name,
+                                      @Part("mobile_phone") RequestBody mobile,
+                                      @Part("type") RequestBody type,
+                                      @Part("ingredient") RequestBody ingredient,
+                                      @Part MultipartBody.Part file);
 
     @GET("history")
     Observable<ResponseHistory> history(@Query("mobile_phone") String mobilePhone);

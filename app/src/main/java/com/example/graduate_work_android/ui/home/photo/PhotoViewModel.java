@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.models.ResponseUploadImage;
 import com.example.graduate_work_android.repository.Repository;
+import com.example.graduate_work_android.ui.home.product.ProductFragment;
 import com.example.graduate_work_android.ui.home.response_image.ResponseImageFragment;
 import com.example.graduate_work_android.utils.ImageBottomSheet;
 import com.example.graduate_work_android.utils.callback.CallBackUpload;
@@ -52,6 +53,8 @@ public class PhotoViewModel extends ViewModel implements CallBackUpload {
             repository.uploadFile(name.getValue(), sharedPreferences
                             .getString("mobileNumber", "0000000000"),
                     file, this);
+        } else {
+            Toast.makeText(activity, "Заповніть всі поля", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -77,7 +80,6 @@ public class PhotoViewModel extends ViewModel implements CallBackUpload {
             throwable();
             Log.d("res", responseUploadImage.getText());
         }
-
     }
 
     @Override
@@ -88,5 +90,13 @@ public class PhotoViewModel extends ViewModel implements CallBackUpload {
 
     public MutableLiveData<ResponseUploadImage> getResponse() {
         return response;
+    }
+
+    public void add() {
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new ProductFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

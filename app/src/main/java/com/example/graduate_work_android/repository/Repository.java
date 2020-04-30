@@ -79,6 +79,34 @@ public class Repository {
     }
 
     @SuppressLint("CheckResult")
+    public void addProduct(String names, String mobileNumber, File file, String types, String ingredients,
+                           CallBackResponse callBackResponse) {
+        RequestBody mobile = RequestBody.create(mobileNumber,
+                MediaType.parse("text/plain"));
+
+        RequestBody name = RequestBody.create(names,
+                MediaType.parse("text/plain"));
+
+        RequestBody type = RequestBody.create(types,
+                MediaType.parse("text/plain"));
+
+        RequestBody ingredient = RequestBody.create(ingredients,
+                MediaType.parse("text/plain"));
+
+        RequestBody requestFile =
+                RequestBody.create(file, MediaType.parse("image/jpeg"));
+
+        MultipartBody.Part fileToUpload =
+                MultipartBody.Part.createFormData("file", file.getName(),
+                        requestFile);
+        App.getComponent().getApi().product(name, mobile, type, ingredient, fileToUpload)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBackResponse::response,
+                        callBackResponse::errorResponse);
+    }
+
+    @SuppressLint("CheckResult")
     public void history(String mobileNumber, CallbackHistory callbackHistory) {
 
         App.getComponent().getApi().history(mobileNumber)
