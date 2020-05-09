@@ -7,49 +7,46 @@ public class ResponseUploadImage {
     private boolean success;
     private String result;
     private String text;
+    private int danger;
     private List<String> allergic;
     private List<Supplement> supplement;
 
     public ResponseUploadImage(int status, boolean success, String result, String text,
-                               List<String> allergic, List<Supplement> supplement) {
+                               int danger, List<String> allergic, List<Supplement> supplement) {
         this.status = status;
         this.success = success;
         this.result = result;
         this.text = text;
+        this.danger = danger;
         this.allergic = allergic;
         this.supplement = supplement;
     }
 
-
-    public List<String> getAllergic() {
-        return allergic;
+    public int getStatus() {
+        return status;
     }
-
-
-    public List<Supplement> getSupplement() {
-        return supplement;
-    }
-
 
     public boolean isSuccess() {
         return success;
     }
 
-
     public String getResult() {
         return result;
     }
-
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public int getDanger() {
+        return danger;
     }
 
-    public int getStatus() {
-        return status;
+    public List<String> getAllergic() {
+        return allergic;
+    }
+
+    public List<Supplement> getSupplement() {
+        return supplement;
     }
 }

@@ -3,26 +3,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login">Login</string>
-    <string name="no_account_yet_create_one">No account yet? Create one</string>
-    <string name="mobile_phone">Mobile phone</string>
-    <string name="password">Password</string>
-    <string name="sign_up">Sign up</string>
-    <string name="confirm_password">Confirm password</string>
-    <string name="name">Name</string>
-    <string name="last_name">Last name</string>
-    <string name="user_name">User name</string>
-    <string name="birthday">Birthday</string>
-    <string name="or_login">Or Login</string>
-    <string name="errorMobilePhone">Mobile phone must be 10 characters without 38</string>
-    <string name="required_field">Required field</string>
-    <string name="did_not_macth">Password and confirm password didn\'t match</string>
+    <string name="login">Логін</string>
+    <string name="no_account_yet_create_one">Зареєструватися</string>
+    <string name="mobile_phone">Мобільний номер</string>
+    <string name="password">Пароль</string>
+    <string name="sign_up">Реєстрація</string>
+    <string name="confirm_password">Підтвердіть пароль</string>
+    <string name="name">Ім\'я</string>
+    <string name="last_name">Прізвище</string>
+    <string name="user_name">Ім\'я користувача</string>
+    <string name="birthday">Дата народження</string>
+    <string name="or_login">Або логін</string>
+    <string name="errorMobilePhone">Мобільний телефон повинен містити 10 символів без 38</string>
+    <string name="required_field">Важливе поле</string>
+    <string name="did_not_macth">Пароль та його підтвердження не співпадають</string>
     <string name="choosePicture">Виберіть картинку</string>
     <string name="picture">Картинка</string>
     <string name="camera">Камера</string>
     <string name="name_of_product">Ім\'я продукта</string>
     <string name="type_of_product">Тип продукта</string>
-    <string name="upload_picture_with_ingredient">Upload picture with ingredient</string>
+    <string name="upload_picture_with_ingredient">Загрузити фото</string>
     <string name="analyze">Проаналізувати</string>
     <string name="category">Категорія:</string>
     <string name="danger">Небезпека:</string>
@@ -40,4 +40,5 @@
     <string name="histories">Історія</string>
     <string name="igredient">Склад</string>
     <string name="photo">Фото</string>
+    <string name="nothing">У даному продукті харчових добавок чи алергій не знайдено</string>
 </resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.graduate_work_android.App;
+import com.example.graduate_work_android.utils.callback.CallBackPrediction;
 import com.example.graduate_work_android.utils.callback.CallBackRegistration;
 import com.example.graduate_work_android.utils.callback.CallBackResponse;
 import com.example.graduate_work_android.utils.callback.CallBackUpload;
@@ -135,6 +136,16 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callbackAllergic::responseAllergic,
                         callbackAllergic::error);
+    }
+
+    @SuppressLint("CheckResult")
+    public void prediction(String mobileNumber, String type, int danger, CallBackPrediction prediction) {
+
+        App.getComponent().getApi().prediction(mobileNumber, type, danger)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(prediction::response,
+                        prediction::error);
     }
 
     @SuppressLint("CheckResult")

@@ -3,6 +3,7 @@ package com.example.graduate_work_android.network;
 import com.example.graduate_work_android.models.ResponseAllergic;
 import com.example.graduate_work_android.models.ResponseHistory;
 import com.example.graduate_work_android.models.ResponseModel;
+import com.example.graduate_work_android.models.ResponsePrediction;
 import com.example.graduate_work_android.models.ResponseSupplement;
 import com.example.graduate_work_android.models.ResponseUploadImage;
 
@@ -50,6 +51,11 @@ public interface ApiService {
 
     @GET("allergic_user")
     Observable<ResponseAllergic> getAllergic(@Query("mobile") String mobilePhone);
+
+    @GET("prediction")
+    Observable<ResponsePrediction> prediction(@Query("mobile") String mobilePhone,
+                                              @Query("type") String type,
+                                              @Query("danger") int danger);
 
     @GET("supplement")
     Observable<ResponseSupplement> getSupplement();

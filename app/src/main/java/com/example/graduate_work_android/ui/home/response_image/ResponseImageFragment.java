@@ -1,6 +1,7 @@
 package com.example.graduate_work_android.ui.home.response_image;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,7 @@ import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.adapter.ResponseAdapter;
 import com.example.graduate_work_android.databinding.FragmentResponseImageBinding;
 import com.example.graduate_work_android.models.Allergic;
+import com.example.graduate_work_android.models.Prediction;
 import com.example.graduate_work_android.models.ResponseUploadImage;
 import com.example.graduate_work_android.models.RowType;
 import com.example.graduate_work_android.ui.home.photo.PhotoViewModel;
@@ -66,10 +69,20 @@ public class ResponseImageFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setHasFixedSize(true);
         if (list.size() > 0) {
+            binding.nothing.setVisibility(View.GONE);
+            binding.recyclerView.setVisibility(View.VISIBLE);
             ResponseAdapter adapter = new ResponseAdapter(list, activity);
             recyclerView.setAdapter(adapter);
+        } else {
+            binding.nothing.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
         }
-
+        viewModel.prediction.observe(activity, new Observer<Prediction>() {
+            @Override
+            public void onChanged(Prediction prediction) {
+                Log.d("prediction", prediction.getName());
+            }
+        });
         return binding.getRoot();
     }
 
