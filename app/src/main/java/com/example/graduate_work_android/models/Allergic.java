@@ -31,4 +31,9 @@ public class Allergic implements RowType{
     public String getAllergic() {
         return allergic;
     }
+
+    @Override
+    public String getPhoto() {
+        return null;
+    }
 }

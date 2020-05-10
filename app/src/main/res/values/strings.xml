@@ -41,4 +41,5 @@
     <string name="igredient">Склад</string>
     <string name="photo">Фото</string>
     <string name="nothing">У даному продукті харчових добавок чи алергій не знайдено</string>
+    <string name="product_from_db">Продукт з бази даних</string>
 </resources>

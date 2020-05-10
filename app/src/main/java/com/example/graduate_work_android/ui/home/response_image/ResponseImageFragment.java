@@ -31,7 +31,7 @@ import java.util.List;
 
 public class ResponseImageFragment extends Fragment {
     private FragmentActivity activity;
-
+    private ResponseAdapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +71,15 @@ public class ResponseImageFragment extends Fragment {
         if (list.size() > 0) {
             binding.nothing.setVisibility(View.GONE);
             binding.recyclerView.setVisibility(View.VISIBLE);
-            ResponseAdapter adapter = new ResponseAdapter(list, activity);
+            adapter = new ResponseAdapter(list, activity);
             recyclerView.setAdapter(adapter);
         } else {
             binding.nothing.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
         }
-        viewModel.prediction.observe(activity, new Observer<Prediction>() {
-            @Override
-            public void onChanged(Prediction prediction) {
-                Log.d("prediction", prediction.getName());
-            }
+        viewModel.prediction.observe(activity, prediction -> {
+            Log.d("prediction", prediction.getName());
+            adapter.addPrediction(prediction);
         });
         return binding.getRoot();
     }

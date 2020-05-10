@@ -1,5 +1,8 @@
 package com.example.graduate_work_android.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.graduate_work_android.R;
 import com.example.graduate_work_android.databinding.ItemAllergicBinding;
 import com.example.graduate_work_android.databinding.ItemBinding;
+import com.example.graduate_work_android.databinding.ItemPredictionBinding;
+import com.example.graduate_work_android.models.Prediction;
 import com.example.graduate_work_android.models.RowType;
 import com.example.graduate_work_android.models.Supplement;
 
@@ -32,6 +37,8 @@ public class ResponseAdapter extends RecyclerView.Adapter {
         super.getItemViewType(position);
         if (response.get(position) instanceof Supplement)
             return RowType.SUPPLEMENT;
+        else if (response.get(position) instanceof Prediction)
+            return RowType.PREDICTION;
         return RowType.ALLERGIC;
     }
 
@@ -43,16 +50,26 @@ public class ResponseAdapter extends RecyclerView.Adapter {
                     DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                             R.layout.item, parent, false);
             return new AdapterViewHolder(employeeListItemBinding);
-        } else {
+        } else if (viewType == RowType.ALLERGIC) {
             ItemAllergicBinding employeeListItemBinding =
                     DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                             R.layout.item_allergic, parent, false);
             return new AllergicViewHolder(employeeListItemBinding);
         }
+        ItemPredictionBinding employeeListItemBinding =
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                        R.layout.item_prediction, parent, false);
+        return new PredictionViewHolder(employeeListItemBinding);
+
     }
 
     public void setData(List<RowType> data) {
         this.response = data;
+        notifyDataSetChanged();
+    }
+
+    public void addPrediction(Prediction prediction) {
+        this.response.add(prediction);
         notifyDataSetChanged();
     }
 
@@ -89,11 +106,20 @@ public class ResponseAdapter extends RecyclerView.Adapter {
             ((AdapterViewHolder) holder).itemBinding.name.setText(names);
             ((AdapterViewHolder) holder).itemBinding.category.setText(supplement.getCategory());
             ((AdapterViewHolder) holder).itemBinding.danger.setText(supplement.getDanger());
-        } else {
+        } else if (holder instanceof AllergicViewHolder) {
             RowType allergic = response.get(position);
             String allergics = allergic.getAllergic().substring(0, 1).toUpperCase()
                     + allergic.getAllergic().substring(1);
             ((AllergicViewHolder) holder).allergicBinding.name.setText(allergics);
+        } else {
+            RowType prediction = response.get(position);
+            String type = prediction.getCategory().substring(0, 1).toUpperCase()
+                    + prediction.getCategory().substring(1);
+            ((PredictionViewHolder) holder).itemBinding.name.setText(prediction.getName());
+            byte[] decodedString = Base64.decode(prediction.getPhoto(), Base64.DEFAULT);
+            Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            ((PredictionViewHolder) holder).itemBinding.image.setImageBitmap(bm);
+            ((PredictionViewHolder) holder).itemBinding.type.setText(type);
         }
 
     }
@@ -107,6 +133,15 @@ public class ResponseAdapter extends RecyclerView.Adapter {
         private ItemBinding itemBinding;
 
         AdapterViewHolder(@NonNull ItemBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
+        }
+    }
+
+    class PredictionViewHolder extends RecyclerView.ViewHolder {
+        private ItemPredictionBinding itemBinding;
+
+        PredictionViewHolder(@NonNull ItemPredictionBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
         }

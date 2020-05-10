@@ -1,6 +1,6 @@
 package com.example.graduate_work_android.models;
 
-public class Prediction {
+public class Prediction implements RowType{
     private String ingredient;
     private String photo;
     private String name;
@@ -23,6 +23,26 @@ public class Prediction {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getDanger() {
+        return null;
+    }
+
+    @Override
+    public String getCategory() {
+        return type;
+    }
+
+    @Override
+    public String getId() {
+        return null;
+    }
+
+    @Override
+    public String getAllergic() {
+        return null;
     }
 
     public String getType() {

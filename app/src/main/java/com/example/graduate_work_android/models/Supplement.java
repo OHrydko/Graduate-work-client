@@ -37,6 +37,11 @@ public class Supplement implements RowType {
         return null;
     }
 
+    @Override
+    public String getPhoto() {
+        return null;
+    }
+
 
     public String getName() {
         return name;
